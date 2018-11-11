@@ -1,4 +1,4 @@
-package com.study.jmx_sample.metric;
+package com.study.jmx_sample.applications.mbean;
 
 public interface ExampleMetricMXBean {
     int getValue();

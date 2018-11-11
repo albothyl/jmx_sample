@@ -1,4 +1,4 @@
-package com.study.jmx_sample.metric;
+package com.study.jmx_sample.applications.metric;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ExampleMetric {
-    private String key;
+    private String path;
     private int value;
 }
