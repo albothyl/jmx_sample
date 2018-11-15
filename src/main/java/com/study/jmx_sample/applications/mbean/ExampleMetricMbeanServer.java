@@ -10,6 +10,9 @@ import java.lang.management.ManagementFactory;
 @Service
 public class ExampleMetricMbeanServer {
 
+    /**
+     * vmOption: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+     */
     private final MBeanServer server = ManagementFactory.getPlatformMBeanServer();
 
     public ExampleMetricMXBeanImpl registerMBean(String key) {
