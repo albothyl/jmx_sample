@@ -18,15 +18,30 @@ public class JmxClient {
 
     private MBeanServerConnection mBeanServer;
 
-    public void getValue(String mBeanName) throws Exception {
+    public void getMetricValue(String mBeanName) throws Exception {
         ObjectName objectName = new ObjectName("com.java.metric:type=Count,name=" + mBeanName);
 
         MBeanInfo mBeanInfo = mBeanServer.getMBeanInfo(objectName);
 
         MBeanAttributeInfo[] mBeanInfoAttributes = mBeanInfo.getAttributes();
 
+        log.info("============================== getMetricValue");
+
         for (MBeanAttributeInfo mBeanAttributeInfo : mBeanInfoAttributes) {
-            log.info("==============================");
+            log.info("mBeanAttributeInfo name: {}: {}", mBeanAttributeInfo.getName(), mBeanServer.getAttribute(objectName, mBeanAttributeInfo.getName()));
+        }
+    }
+
+    public void getMbeanValue(String mBeanName) throws Exception {
+        ObjectName objectName = new ObjectName(mBeanName);
+
+        MBeanInfo mBeanInfo = mBeanServer.getMBeanInfo(objectName);
+
+        MBeanAttributeInfo[] mBeanInfoAttributes = mBeanInfo.getAttributes();
+
+        log.info("============================== getMbeanValue");
+
+        for (MBeanAttributeInfo mBeanAttributeInfo : mBeanInfoAttributes) {
             log.info("mBeanAttributeInfo name: {}: {}", mBeanAttributeInfo.getName(), mBeanServer.getAttribute(objectName, mBeanAttributeInfo.getName()));
         }
     }

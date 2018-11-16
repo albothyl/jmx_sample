@@ -20,6 +20,7 @@ public class ExampleMetricController {
     @Autowired
     private JmxClient jmxClient;
 
+    //http://127.0.0.1:8080/metric/add/mbeanSample/15
     @RequestMapping(method = RequestMethod.GET, value = "/metric/add/{path}/{value}")
     public ExampleMetric addMetricValue(@PathVariable("path") String path, @PathVariable("value") int value) {
         log.info("input metric path: {}, value: {}", path, value);
@@ -29,10 +30,23 @@ public class ExampleMetricController {
         return exampleMetric;
     }
 
+    //http://127.0.0.1:8080/metric/get/mbeanSample
     @RequestMapping(method = RequestMethod.GET, value = "/metric/get/{mBeanName}")
     public String checkMetricValue(@PathVariable("mBeanName") String mBeanName) {
         try {
-            jmxClient.getValue(mBeanName);
+            jmxClient.getMetricValue(mBeanName);
+        } catch (Exception e) {
+            log.error("exception occur", e);
+        }
+
+        return "check console";
+    }
+
+    //http://127.0.0.1:8080/mbean/get
+    @RequestMapping(method = RequestMethod.GET, value = "/mbean/get/{mBeanName}")
+    public String checkMbeanValue(@PathVariable("mBeanName") String mBeanName) {
+        try {
+            jmxClient.getMbeanValue(mBeanName);
         } catch (Exception e) {
             log.error("exception occur", e);
         }
